@@ -11,6 +11,6 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        //
+        $this->call(UsersTableSeeder::class)->create();
     }
 }

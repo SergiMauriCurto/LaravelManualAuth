@@ -11,23 +11,24 @@ use App\Http\Requests;
 use PDO;
 
 class HomeController extends Controller
+
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function index()
     {
-
-        $pdo = new PDO('sqlite:/home/sergi/Code/laravelManualAuth/database/database.sqlite');
-        $query = $pdo->prepare('SELECT * FROM users WHERE id=1');
-        $query->execute();
-        $row = $query->fetch();
-        dd($row);
+        //Passos controlador bàsic (glue/cola del model i vista):
+        // 1) Aconseguir informació de l'usuari de la base de dades
+        // 2) Mostrar vista home passant info del usuari
 
 
-        $user = new \stdClass();
-        $user->name = "Sergi";
-        $user->sn1 = "Mauri";
-        return view('home')
-            ->withUser($user);
+            $user = User::find(1);
 
+            return view('home')
+                ->withUser($user);
 
     }
 }
