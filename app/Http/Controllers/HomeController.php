@@ -6,29 +6,32 @@ use App\User;
 
 use Illuminate\Http\Request;
 
-use App\Http\Requests;
+use App\Http\Requests;+
 
 use PDO;
 
 class HomeController extends Controller
 
 {
-    public function __construct()
+    public function setUserCookie()
     {
-        $this->middleware('auth');
+        $user = user::find(1);
+        sercookie('user', json_encode($token));
     }
 
-    public function index()
+    public function getuser()
     {
-        //Passos controlador bàsic (glue/cola del model i vista):
-        // 1) Aconseguir informació de l'usuari de la base de dades
-        // 2) Mostrar vista home passant info del usuari
 
+            $id = $_COOKIE('user');
+            return = User::where(["token" => $token])->first();
 
-            $user = User::find(1);
+        
+    }
+    public function userIsAuthenticated()
+    {
 
-            return view('home')
-                ->withUser($user);
+        $id = $_COOKIE('user');
+        return isset($_COOKIE['user']) ? true : false;
 
     }
 }
