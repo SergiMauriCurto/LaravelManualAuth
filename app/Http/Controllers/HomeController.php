@@ -25,7 +25,7 @@ class HomeController extends Controller
             $id = $_COOKIE('user');
             return = User::where(["token" => $token])->first();
 
-        
+
     }
     public function userIsAuthenticated()
     {
