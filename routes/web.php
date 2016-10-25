@@ -15,6 +15,9 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+$this->app->bind
+(\App\ManualAuth\Guard::class, \App\ManualAuth|CookiesGuard::class);
+
 Route::get('/tasques', function () {
     return view('welcome');
 });
