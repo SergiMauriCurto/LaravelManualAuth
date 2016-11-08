@@ -1,37 +1,23 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use App\User;
-
+use Auth;
 use Illuminate\Http\Request;
-
-use App\Http\Requests;+
-
-use PDO;
-
+use App\Http\Requests;
 class HomeController extends Controller
-
 {
-    public function setUserCookie()
+    public function index()
     {
-        $user = user::find(1);
-        sercookie('user', json_encode($token));
+        return view('home');
     }
-
-    public function getuser()
-    {
-
-            $id = $_COOKIE('user');
-            return = User::where(["token" => $token])->first();
-
-
+    private function setUserCookie() {
+        $user = User::findOrFail(1);;
+        setcookie('user',$user->token);
     }
-    public function userIsAuthenticated()
+    private function getUser()
     {
-
-        $id = $_COOKIE('user');
-        return isset($_COOKIE['user']) ? true : false;
-
+        //Opció 1 : query string $_GET
+        $token = $_COOKIE['user'];
+        return User::where(["token" => $token])->first();
     }
 }
